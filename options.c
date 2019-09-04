@@ -13,6 +13,8 @@ int fileSizeFlag;
 int lastModTimeFlag;
 int tpiugsFlag;
 
+int indentValINT;
+
 char* indentValString;
 char* dirName;
 
@@ -55,6 +57,16 @@ static void printArgs(int argc, char** argv)
 	}
 }
 
+static int convertIndentStringToInt()
+{
+	if(indentValString != NULL)
+	{
+		return atoi(indentValString);
+	}
+
+	return -1;
+}
+
 void setFlags(int argc, char** argv)
 {
 	//getopts variables
@@ -73,6 +85,7 @@ void setFlags(int argc, char** argv)
 			case 'I':
 				setIndentFlag = 1;
 				indentValString = optarg;
+				indentValINT = convertIndentStringToInt();
 				break;
 			case 'L':
 				symLinkFlag = 1;

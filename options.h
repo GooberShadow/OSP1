@@ -19,6 +19,8 @@ extern int fileSizeFlag;
 extern int lastModTimeFlag;
 extern int tpiugsFlag;
 
+extern int indentValINT;
+
 extern char* indentValString;
 extern char* dirName;
 

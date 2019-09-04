@@ -9,10 +9,11 @@ int main(int argc, char** argv)
 	initializeFlags();
 	setFlags(argc, argv);
 	printFlags();
+	
+	
 
-
-	printHelp();
-
+//	printHelp();
+	printAll();
 	return 0;	
 }
 

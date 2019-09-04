@@ -20,5 +20,6 @@ void printHelp()
 
 void printAll()
 {
-	listFilesInDirectory(dirName);
+	//listFilesInDirectory(dirName);
+	listdir(dirName, 0);	
 }

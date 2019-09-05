@@ -60,6 +60,53 @@ int isDirectory(char* path)
 	}
 }
 
+void checkHelpMessage()
+{
+	if(helpFlag == 1)
+	{
+		printHelp();
+	}
+}
+void checkSymbolicLinks()
+{
+	if(symLinkFlag == 1)
+	{
+		//followLinks();
+	}
+}
+
+void checkFileType(path)
+{
+	if(printInfoFlag == 1)
+	{
+		printFileInfo(path);
+	}
+}
+
+void checkLastTimeModified(char* path)
+{
+	if(lastModTimeFlag == 1)
+	{
+		printModTime(path);
+	}
+}
+
+void checkUID(char* path)
+{
+	if(uidFlag == 1)
+	{
+		printUID(path);
+	}
+}
+
+void checkGID(char* path)
+{
+	if(gidFlag == 1)
+	{
+		printGID(path);
+	}
+}
+
 void listdir(const char *name, int indent)
 {
 	DIR* dir;
@@ -82,11 +129,21 @@ void listdir(const char *name, int indent)
 				continue;
 			}
 			snprintf(path, sizeof(path), "%s/%s", name, entry->d_name);
-			printf("%*s-%s\n", indent, "", entry->d_name);
+			//Check help message first
+			checkHelpMessage();
+			printf("\n%*s-%s\t\t", indent, "", entry->d_name);
+			//Check each option
+			checkFileType(path);
+			checkUID(path);
+			checkGID(path);
+			
+			checkLastTimeModified(path);	
+			
 			listdir(path, indent + indentValINT);
 		}
 		else
 		{
+			//Check each option
 			printf("%*s- %s\n", indent, "", entry->d_name);
 		}
 	}

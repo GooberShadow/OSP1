@@ -113,7 +113,7 @@ void setFlags(int argc, char** argv)
 				break;
 			case 'l':
 				tpiugsFlag = 1;
-				EnableTpiugs();
+				//EnableTpiugs();
 				break;
 			case '?':
 				if(optopt = 'I'){

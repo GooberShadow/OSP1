@@ -27,6 +27,32 @@ void printFileInfo(char* path)
 	printf("File info:%d:  ", attr.st_mode);
 }
 
+void printPermissions(char* path)
+{
+	struct stat fileStat;
+	stat(path, &fileStat);
+
+	printf("File Permissions: ");
+	printf( (S_ISDIR(fileStat.st_mode)) ? "d" : "-");
+	printf( (fileStat.st_mode & S_IRUSR) ? "r" : "-");
+	printf( (fileStat.st_mode & S_IWUSR) ? "w" : "-");
+	printf( (fileStat.st_mode & S_IXUSR) ? "x" : "-");
+	printf( (fileStat.st_mode & S_IRGRP) ? "r" : "-");
+	printf( (fileStat.st_mode & S_IWGRP) ? "w" : "-");
+	printf( (fileStat.st_mode & S_IXGRP) ? "x" : "-");
+	printf( (fileStat.st_mode & S_IROTH) ? "r" : "-");
+	printf( (fileStat.st_mode & S_IWOTH) ? "w" : "-");
+	printf( (fileStat.st_mode & S_IXOTH) ? "x" : "-");
+	printf(" : ");
+}
+
+void printINODE(char* path)
+{
+	struct stat fileStat;
+	stat(path, &fileStat);
+	printf("Inode number:%d: ", fileStat.st_ino);
+}
+
 void printModTime(char* path)
 {
 	struct stat attr;
@@ -47,6 +73,13 @@ void printGID(char* path)
 	struct stat attr;
 	stat(path, &attr);
 	printf("GID:%d:  ", attr.st_gid);
+}
+
+void printSize(char* path)
+{
+	struct stat fileStat;
+	stat(path, &fileStat);
+	printf("SIZE:%d bytes: ", fileStat.st_size);
 }
 
 void printAll()

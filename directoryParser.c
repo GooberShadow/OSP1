@@ -75,11 +75,28 @@ void checkSymbolicLinks()
 	}
 }
 
-void checkFileType(path)
+void checkFileType(char* path)
 {
 	if(printInfoFlag == 1)
 	{
 		printFileInfo(path);
+	}
+}
+
+void checkPermissions(char* path)
+{
+	if(permissionsFlag == 1)
+	{
+		printPermissions(path);
+	}
+
+}
+
+void checkINODE(char* path)
+{
+	if(numLinksFlag == 1)
+	{
+		printINODE(path);
 	}
 }
 
@@ -107,6 +124,27 @@ void checkGID(char* path)
 	}
 }
 
+void checkSize(char* path)
+{
+	if(fileSizeFlag == 1)
+	{
+		printSize(path);
+	}
+}
+
+void checkTPIUGS(char* path)
+{
+	if(tpiugsFlag == 1)
+	{
+		printFileInfo(path);
+		printPermissions(path);
+		printINODE(path);
+		printUID(path);
+		printGID(path);
+		printSize(path);
+	}
+}
+
 void listdir(const char *name, int indent)
 {
 	DIR* dir;
@@ -131,20 +169,23 @@ void listdir(const char *name, int indent)
 			snprintf(path, sizeof(path), "%s/%s", name, entry->d_name);
 			//Check help message first
 			checkHelpMessage();
-			printf("\n%*s-%s\t\t", indent, "", entry->d_name);
+			printf("\n\n%*s-%s\t\t", indent, "", entry->d_name);
 			//Check each option
+			checkPermissions(path);
+			checkINODE(path);
 			checkFileType(path);
 			checkUID(path);
 			checkGID(path);
-			
+			checkSize(path);
 			checkLastTimeModified(path);	
-			
+			checkTPIUGS(path);			
+
 			listdir(path, indent + indentValINT);
 		}
 		else
 		{
 			//Check each option
-			printf("%*s- %s\n", indent, "", entry->d_name);
+			printf("\n\n%*s- %s", indent, "", entry->d_name);
 		}
 	}
 	closedir(dir);

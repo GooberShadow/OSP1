@@ -8,7 +8,7 @@ int main(int argc, char** argv)
 {
 	initializeFlags();
 	setFlags(argc, argv);
-	printFlags();
+	//printFlags();
 	
 	
 

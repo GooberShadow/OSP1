@@ -67,11 +67,11 @@ void checkHelpMessage()
 		printHelp();
 	}
 }
-void checkSymbolicLinks()
+void checkSymbolicLinks(char* path)
 {
 	if(symLinkFlag == 1)
 	{
-		//followLinks();
+		printSymbolicLinks(path);
 	}
 }
 
@@ -171,6 +171,7 @@ void listdir(const char *name, int indent)
 			checkHelpMessage();
 			printf("\n\n%*s-%s\t\t", indent, "", entry->d_name);
 			//Check each option
+			checkSymbolicLinks(path);
 			checkPermissions(path);
 			checkINODE(path);
 			checkFileType(path);

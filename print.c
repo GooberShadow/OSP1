@@ -20,6 +20,31 @@ void printHelp()
 	exit(0);	
 }
 
+void printSymbolicLinks(char* path)
+{
+	struct stat fileStat;
+	lstat(path, &fileStat);
+	switch(fileStat.st_mode & S_IFMT)
+	{
+		case S_IFLNK:
+			printf("Symbolic Links: This is a link : ");
+			break;
+		case S_IFREG:
+			printf("Symbolic Links: This is not a link : ");
+			break;
+	}
+	//int status;
+	//status = lstat(path, &fileStat);
+	/*if (S_ISLNK(fileStat.st_mode))
+	{
+		printf("Symbolic Links :This file is a link:");
+	}	
+	else
+	{
+		printf("Symbolic Links :This file is not a link:");
+	}*/
+}
+
 void printFileInfo(char* path)
 {
 	struct stat attr;
